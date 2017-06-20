@@ -61,6 +61,9 @@ public class MainSpeechlet implements Speechlet {
       throw new SpeechletException("Invalid Intent");
     } else if (IntentName.AMZ_HELP_INTENT.equals(intentName)) {
       return getHelpResponse();
+    } else if (IntentName.AMZ_CANCEL_INTENT.equals(intentName) ||
+        IntentName.AMZ_STOP_INTENT.equals(intentName)) {
+      return getTellResponse("Goodbye!");
     } else if (IntentName.TRACK_INTENT.equals(intentName)) {
       String vehicle = intent.getSlot("vehicle").getValue();
       if (log.isDebugEnabled()) {
