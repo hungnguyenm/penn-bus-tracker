@@ -124,7 +124,7 @@ public class MainSpeechlet implements Speechlet {
       log.debug("UnknownIntent requestId={}, sessionId={} -- intent: {}", request.getRequestId(),
           session.getSessionId(), intentName);
     }
-    return getTellResponse("Goodbye!");
+    return getTellResponse("Sorry, I don't understand your question. Please try again!");
   }
 
   @Override
