@@ -45,11 +45,6 @@ public class MainSpeechlet implements Speechlet {
   @Override
   public SpeechletResponse onIntent(final IntentRequest request, final Session session)
       throws SpeechletException {
-    if (log.isDebugEnabled()) {
-      log.debug("onIntent requestId={}, sessionId={}", request.getRequestId(),
-          session.getSessionId());
-    }
-
     Intent intent = request.getIntent();
     String intentName = (intent != null) ? intent.getName() : null;
 
@@ -72,7 +67,8 @@ public class MainSpeechlet implements Speechlet {
       }
 
       if (vehicle == null || vehicle.isEmpty()) {
-        return getHelpResponse();
+        return getResponse("Sorry, I can't recognize the route you mentioned. Please try again!",
+            "You can ask question such as Where is Shuttle East");
       } else {
         PennRides.Route route = null;
         switch (vehicle.toLowerCase()) {
@@ -117,11 +113,18 @@ public class MainSpeechlet implements Speechlet {
             }
             return getTellResponse(message);
           }
+        } else {
+          return getResponse("There is no route named " + vehicle.toLowerCase() + "!",
+              "You can ask question such as Where is Shuttle East");
         }
       }
     }
 
-    return getHelpResponse();
+    if (log.isDebugEnabled()) {
+      log.debug("UnknownIntent requestId={}, sessionId={} -- intent: {}", request.getRequestId(),
+          session.getSessionId(), intentName);
+    }
+    return getTellResponse("Goodbye!");
   }
 
   @Override
