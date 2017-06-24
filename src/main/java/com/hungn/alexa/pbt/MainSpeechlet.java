@@ -71,7 +71,8 @@ public class MainSpeechlet implements Speechlet {
             "You can ask question such as Where is Shuttle East");
       } else {
         PennRides.Route route = null;
-        switch (vehicle.toLowerCase()) {
+        switch (vehicle.trim().replaceAll("\\s{2,}", " ")
+            .replaceAll("[^A-Za-z ]", "").toLowerCase()) {
           case "shuttle east":
             route = PennRides.Route.SHUTTLE_EAST;
             break;
