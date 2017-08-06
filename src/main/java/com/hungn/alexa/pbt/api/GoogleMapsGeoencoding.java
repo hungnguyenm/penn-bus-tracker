@@ -22,7 +22,7 @@ public class GoogleMapsGeoencoding {
   public static final String BASE_SCHEME = "https";
   public static final String BASE_HOST = "maps.googleapis.com";
   public static final String BASE_URL = "maps/api/geocode/json";
-  private static final String API_KEY = "AIzaSyA4h6XL16EJrEjdykvBtcmrG2ZyImyz7p0";
+  private static final String API_KEY = System.getenv("GoogleMaps_API_key");
 
   private static final Log log = LogFactory.getLog(GoogleMapsGeoencoding.class);
 
